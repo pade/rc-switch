@@ -1,4 +1,5 @@
 /*
+/*
   RCSwitch - Arduino libary for remote control outlet switches
   Copyright (c) 2011 Suat Özgür.  All right reserved.
   
@@ -450,6 +451,22 @@ void RCSwitch::sendTriState(char* sCodeWord) {
 
 void RCSwitch::send(unsigned long Code, unsigned int length) {
   this->send( this->dec2binWzerofill(Code, length) );
+}
+
+void RCSwitch::sendString(String code) {
+
+  String binString ;
+  for(int i=0; i<code.length(); i++)
+  {
+    char myChar = code.charAt(i);
+  
+    for(int i=7; i>=0; i--)
+    {
+      byte bytes = bitRead(myChar,i);
+      binString += bytes;
+    }
+  }
+  this->send(binString->c_str());
 }
 
 void RCSwitch::send(char* sCodeWord) {

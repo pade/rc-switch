@@ -72,6 +72,7 @@ class RCSwitch {
     void sendTriState(char* Code);
     void send(unsigned long Code, unsigned int length);
     void send(char* Code);
+    void sendString(String Code);
     
     #if not defined( RCSwitchDisableReceiving )
     void enableReceive(int interrupt);
